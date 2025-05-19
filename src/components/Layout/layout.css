@@ -1,0 +1,9 @@
+.layout {
+  position: relative;
+}
+
+.menu-lists {
+  position: fixed;
+  right: 50px;
+  top: 30%;
+}

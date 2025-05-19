@@ -1,0 +1,215 @@
+/* Certificates Section */
+.certificates-section {
+  padding: 5rem 0;
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--color-primary);
+}
+
+.certificates-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      circle at 30% 20%,
+      rgba(39, 174, 96, 0.03) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(39, 174, 96, 0.03) 0%,
+      transparent 20%
+    );
+  pointer-events: none;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.header-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.decoration-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+}
+
+.decoration-line {
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-secondary);
+  margin: 0 10px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background-color: var(--color-secondary);
+}
+
+.section-subtitle {
+  color: var(--color-grey-2);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+}
+
+/* Certificates Grid */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Certificate Item */
+.certificate-item {
+  transition: transform 0.3s ease;
+}
+
+.certificate-item:hover {
+  transform: translateY(-10px);
+}
+
+/* Certificate Card */
+.certificate-card {
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  background-color: var(--color-grey-5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.certificate-card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 15px rgba(39, 174, 96, 0.2);
+  border-color: var(--color-secondary);
+}
+
+/* Certificate Image */
+.certificate-image-container {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.certificate-card:hover .certificate-image {
+  transform: scale(1.05);
+}
+
+/* Certificate Overlay */
+.certificate-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(25, 29, 43, 0.9),
+    rgba(25, 29, 43, 0.7) 50%,
+    transparent
+  );
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.certificate-card:hover .certificate-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.certificate-info {
+  color: var(--color-white);
+}
+
+.certificate-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.certificate-issuer {
+  font-size: 0.9rem;
+  color: var(--color-grey-1);
+  margin-bottom: 0.25rem;
+}
+
+.certificate-date {
+  font-size: 0.8rem;
+  color: var(--color-secondary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .certificate-overlay {
+    padding: 1.25rem;
+  }
+}

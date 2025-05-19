@@ -1,0 +1,43 @@
+.hero-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.hero-left {
+  width: 50%;
+}
+
+.hero-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-profile {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-profile img {
+  background: radial-gradient(
+    circle,
+    rgba(77, 77, 82, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+  border-radius: 50%;
+  border: 3px solid var(--color-white);
+}
+
+.hero-right h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.hero-right h1 span {
+  color: var(--color-secondary);
+}
