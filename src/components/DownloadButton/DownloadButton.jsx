@@ -2,10 +2,15 @@ import React from "react";
 import "./downloadbutton.css";
 
 const DownloadButton = () => {
+  const handleDownload = () => {
+    const fileId = '1FBP5Mi6AccU-ag6R1KI7tBsWTMBDI8GT';
+    const downloadUrl = `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
+    window.open(downloadUrl, '_blank');
+  };
   return (
     <div>
       <div className="download-cv">
-        <button>
+        <button onClick={handleDownload}>
           <span className="download-text">Download CV</span>
           <span className="download-icon">
             <svg
