@@ -163,3 +163,9 @@
     max-width: 100%;
   }
 }
+
+@media (min-width: 1280px) and (max-width: 1380px)  { 
+  .contact-section{
+    width: 85%;
+  }
+}

@@ -4,7 +4,7 @@ import DownloadButton from "../../components/DownloadButton/DownloadButton";
 
 export default function Contact() {
   return (
-    <section className="contact-section">
+    <section className="contact-section container">
       <div className="contact-title-bg">
         <h1>
           CONTACT <span>ME</span>

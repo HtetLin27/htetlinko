@@ -83,7 +83,7 @@ export default function Projects() {
     activeFilter === "All" ? projects : projects.filter((project) => project.technologies.includes(activeFilter))
 
   return (
-    <section className="projects-section">
+    <section className="projects-section container">
       <div className="section-container">
         <div className="section-header">
           <div className="header-decoration">

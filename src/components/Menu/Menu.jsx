@@ -1,62 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./menu.css";
-import { Link } from "react-router-dom";
 
 const Menu = ({ activeSection }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="menus">
-      <a href="#hero" className={activeSection === "hero" ? "active" : "icon"}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M19 9.3V4h-3v2.6L12 3L2 12h3v8h5v-6h4v6h5v-8h3zm-9 .7c0-1.1.9-2 2-2s2 .9 2 2z"
-          />
-        </svg>
-      </a>
-      <a
-        href="#about"
-        className={activeSection === "about" ? "active" : "icon"}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"
-          />
-        </svg>
-      </a>
-      <a
-        href="#projects"
-        className={activeSection === "projects" ? "active" : "icon"}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            fill-rule="evenodd"
-            d="M5.4 3h13.2A2.4 2.4 0 0 1 21 5.4v13.2a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 18.6V5.4A2.4 2.4 0 0 1 5.4 3M9 4h2v5h9v2h-9v9H9v-9H4V9h5z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </a>
-      <a
-        href="#certificates"
-        className={activeSection === "certificates" ? "active" : "icon"}
-      >
-        <svg
+    <div className="menu-wrapper">
+      {/* Hamburger Button */}
+      <button className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
+        ☰
+      </button>
+
+      {/* Menu Items */}
+      <div className={`menus ${isOpen ? "show" : ""}`}>
+        <a onClick={()=>setIsOpen(false)} href="#hero" className={activeSection === "hero" ? "active" : "icon"}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19 9.3V4h-3v2.6L12 3L2 12h3v8h5v-6h4v6h5v-8h3zm-9 .7c0-1.1.9-2 2-2s2 .9 2 2z" />
+          </svg>
+        </a>
+        <a onClick={()=>setIsOpen(false)} href="#about" className={activeSection === "about" ? "active" : "icon"}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z" />
+          </svg>
+        </a>
+        <a onClick={()=>setIsOpen(false)} href="#projects" className={activeSection === "projects" ? "active" : "icon"}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path fill="currentColor" fillRule="evenodd" d="M5.4 3h13.2A2.4 2.4 0 0 1 21 5.4v13.2a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 18.6V5.4A2.4 2.4 0 0 1 5.4 3M9 4h2v5h9v2h-9v9H9v-9H4V9h5z" clipRule="evenodd" />
+          </svg>
+        </a>
+        <a onClick={()=>setIsOpen(false)} href="#certificates" className={activeSection === "certificates" ? "active" : "icon"}>
+          <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -70,12 +43,9 @@ const Menu = ({ activeSection }) => {
             />
           </g>
         </svg>
-      </a>
-      <a
-        href="#contact"
-        className={activeSection === "contact" ? "active" : "icon"}
-      >
-        <svg
+        </a>
+        <a onClick={()=>setIsOpen(false)} href="#contact" className={activeSection === "contact" ? "active" : "icon"}>
+          <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -128,7 +98,8 @@ const Menu = ({ activeSection }) => {
             </path>
           </g>
         </svg>
-      </a>
+        </a>
+      </div>
     </div>
   );
 };

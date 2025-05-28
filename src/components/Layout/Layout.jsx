@@ -31,7 +31,7 @@ const Layout = () => {
   }, []);
   return (
     <div className="layout">
-      <div className="container">
+      <div>
         {/* <Outlet /> */}
         <section id="hero">
           <Hero />

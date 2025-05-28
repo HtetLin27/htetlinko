@@ -51,7 +51,7 @@ const experiences = [
 
 const ExperienceTimeline = () => {
   return (
-    <dv className="timeline-container">
+    <dv className="timeline-container container">
       <h3 className="stat-title">My timeline</h3>
       {experiences.map((exp, index) => (
         <div className="timeline-item" key={exp.id}>
@@ -78,7 +78,6 @@ const ExperienceTimeline = () => {
           </div>
         </div>
       ))}
-      <h4 className="and-more">And More</h4>
     </dv>
   );
 };

@@ -6,7 +6,7 @@ import DownloadButton from "../../components/DownloadButton/DownloadButton";
 
 const Hero = () => {
   return (
-    <section className="hero-container">
+    <section className="hero-container container">
       <div className="hero-left">
         <div className="hero-profile">
           <img src="./hero.png" alt="hero" />
@@ -21,17 +21,16 @@ const Hero = () => {
           <TypeAnimation
             sequence={[
               // Same substring at the start will only be typed out once, initially
-              "A Web Frontend Developer",
+              "A Web Frontend Developer.",
               1000,
               "I build beautiful user interfaces.",
               1000,
               "I turn designs into functional code.",
               1000,
-              "I craft responsive and accessible websites.",
-              1000,
             ]}
             wrapper="span"
             speed={50}
+            className="animation-type"
             repeat={Infinity}
           />
 

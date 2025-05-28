@@ -32,7 +32,7 @@ const certificates = [
 
 export default function Certificates() {
   return (
-    <section className="certificates-section">
+    <section className="certificates-section container">
       <div className="section-container">
         <div className="section-header">
           <div className="header-decoration">

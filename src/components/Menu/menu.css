@@ -1,27 +1,66 @@
+.menu-wrapper {
+  position: relative;
+}
+
+/* Hamburger Button */
+.menu-toggle {
+  display: none;
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 24px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Menu Icons */
 .menus {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.icon {
+/* Menu Item Style */
+.icon, .active {
   width: 55px;
   height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: var(--color-grey-4);
   cursor: pointer;
 }
 
+.icon {
+  background-color: var(--color-grey-4);
+}
+
 .active {
-  width: 55px;
-  height: 55px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
   background-color: var(--color-secondary);
-  cursor: pointer;
+}
+
+/* Responsive styles */
+@media (min-width: 370px) and (max-width: 1280px)  {
+  .menu-toggle {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .menus {
+    display: none;
+    position: absolute;
+    /* background: white; */
+    /* padding: 20px; */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    top: 60px;
+    left: 0;
+    right: 0;
+  }
+
+  .menus.show {
+    display: flex;
+  }
 }

@@ -372,3 +372,9 @@
     align-items: flex-start;
   }
 }
+
+@media (min-width: 1280px) and (max-width: 1380px)  { 
+  .section-container{
+    width: 85%;
+  }
+}

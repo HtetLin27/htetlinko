@@ -7,3 +7,12 @@
   right: 50px;
   top: 30%;
 }
+
+
+@media (min-width: 370px) and (max-width: 1280px)  {
+  .menu-lists{
+    top:20px;
+    right: 20px;
+  }
+  
+}

@@ -47,7 +47,7 @@ const About = () => {
   const experienceYearsCalculated = currentYear - startYear + 1;
 
   return (
-    <section className="about-container-main">
+    <section className="about-container-main container">
       <div class="main-title">
         <h2>
           About <span>me</span>
