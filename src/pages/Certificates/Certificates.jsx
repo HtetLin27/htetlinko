@@ -2,31 +2,108 @@ import "./certificates.css";
 const certificates = [
   {
     id: 1,
-    title: "Web Development Certification",
-    issuer: "Frontend Masters",
-    date: "May 2023",
-    imageUrl: "/certificate1.jpg",
+    title: "Legacy JavaScript Algorithms and Data Structures",
+    issuer: "freeCodeCamp",
+    date: "Mar 2025",
+    imageUrl: "/src/assets/images/certificates/legacy-js.png",
   },
   {
     id: 2,
-    title: "React Advanced Concepts",
-    issuer: "Udemy",
-    date: "January 2023",
-    imageUrl: "/certificate1.jpg", // Using the same image for demo
+    title: "Introduction to Front-End Development",
+    issuer: "Meta",
+    date: "Jun 2024",
+    imageUrl: "/src/assets/images/certificates/Introduction-to-frontend.jpeg", // Using the same image for demo
   },
   {
     id: 3,
-    title: "UI/UX Design Fundamentals",
-    issuer: "Coursera",
-    date: "October 2022",
-    imageUrl: "/certificate1.jpg", // Using the same image for demo
+    title: "Version Control",
+    issuer: "Meta",
+    date: "Jul 2024",
+    imageUrl: "/src/assets/images/certificates/meta-version-control.jpeg", // Using the same image for demo
   },
   {
     id: 4,
-    title: "JavaScript Algorithms & Data Structures",
-    issuer: "freeCodeCamp",
-    date: "July 2022",
-    imageUrl: "/certificate1.jpg", // Using the same image for demo
+    title: "Programming with JavaScript ",
+    issuer: "Meta",
+    date: "Jul 2024",
+    imageUrl: "/src/assets/images/certificates/meta-programing-js.jpeg", // Using the same image for demo
+  },
+  {
+    id: 5,
+    title: "HTML and CSS in depth ",
+    issuer: "Meta",
+    date: "Aug 2024",
+    imageUrl: "/src/assets/images/certificates/meta-html-css-depth.jpeg", // Using the same image for demo
+  },
+  {
+    id: 6,
+    title: "React Basics ",
+    issuer: "Meta",
+    date: "Sep 2024",
+    imageUrl: "/src/assets/images/certificates/meta-react.jpeg", // Using the same image for demo
+  },
+  {
+    id: 7,
+    title: "Tailwind CSS 3 Essential Training",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/tailwindcss.jpeg", // Using the same image for demo
+  },
+  {
+    id: 8,
+    title: "React: Creating and Hosting a Full-Stack Site",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/react-create-hosting.jpeg", // Using the same image for demo
+  },
+  {
+    id: 9,
+    title: "React: Building Styles with CSS Modules",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/react-css-module.jpeg", // Using the same image for demo
+  },
+  {
+    id: 10,
+    title: "React.js: Building an Interface",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/react-building-interface.jpeg", // Using the same image for demo
+  },
+   {
+    id: 11,
+    title: "React.js Essential Training",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/react-essential.jpeg", // Using the same image for demo
+  },
+   {
+    id: 12,
+    title: "CSS Essential Training",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/css-essential.jpeg", // Using the same image for demo
+  },
+  {
+    id: 13,
+    title: "Building Modern UIs with React Router v6",
+    issuer: "LinkedIn",
+    date: "Oct 2024",
+    imageUrl: "/src/assets/images/certificates/react-router.jpeg", // Using the same image for demo
+  },
+  {
+    id: 14,
+    title: "Node.js Essential Training",
+    issuer: "LinkedIn",
+    date: "Nov 2024",
+    imageUrl: "/src/assets/images/certificates/nodejs-essential.jpeg", // Using the same image for demo
+  },
+  {
+    id: 15,
+    title: "Express Essentials: Build Powerful Web Apps with Node.js",
+    issuer: "LinkedIn",
+    date: "Nov 2024",
+    imageUrl: "/src/assets/images/certificates/express-essential.jpeg", // Using the same image for demo
   },
 ];
 
