@@ -1,88 +1,23 @@
-import React from "react";
 import "./downloadbutton.css";
 
-const DownloadButton = () => {
+const DownloadButton = ({ label = "Download Resume", className = "" }) => {
   const handleDownload = () => {
-    const fileId = '1FBP5Mi6AccU-ag6R1KI7tBsWTMBDI8GT';
-    const downloadUrl = `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
-    window.open(downloadUrl, '_blank');
+    const fileId = "1FBP5Mi6AccU-ag6R1KI7tBsWTMBDI8GT";
+    const resumeUrl = `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
+    window.open(resumeUrl, "_blank", "noopener,noreferrer");
   };
+
   return (
-    <div>
-      <div className="download-cv">
-        <button onClick={handleDownload}>
-          <span className="download-text">Download CV</span>
-          <span className="download-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-            >
-              <g
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-              >
-                <path
-                  stroke-dasharray="2 4"
-                  stroke-dashoffset="6"
-                  d="M12 3c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                    values="6;0"
-                  />
-                </path>
-                <path
-                  stroke-dasharray="32"
-                  stroke-dashoffset="32"
-                  d="M12 21c-4.97 0 -9 -4.03 -9 -9c0 -4.97 4.03 -9 9 -9"
-                >
-                  <animate
-                    fill="freeze"
-                    attributeName="stroke-dashoffset"
-                    begin="0.1s"
-                    dur="0.4s"
-                    values="32;0"
-                  />
-                </path>
-                <path
-                  stroke-dasharray="10"
-                  stroke-dashoffset="10"
-                  d="M12 8v7.5"
-                >
-                  <animate
-                    fill="freeze"
-                    attributeName="stroke-dashoffset"
-                    begin="0.5s"
-                    dur="0.2s"
-                    values="10;0"
-                  />
-                </path>
-                <path
-                  stroke-dasharray="6"
-                  stroke-dashoffset="6"
-                  d="M12 15.5l3.5 -3.5M12 15.5l-3.5 -3.5"
-                >
-                  <animate
-                    fill="freeze"
-                    attributeName="stroke-dashoffset"
-                    begin="0.7s"
-                    dur="0.2s"
-                    values="6;0"
-                  />
-                </path>
-              </g>
-            </svg>
-          </span>
-        </button>
-      </div>
-    </div>
+    <button type="button" className={`download-btn ${className}`.trim()} onClick={handleDownload}>
+      <span>{label}</span>
+      <span className="download-btn-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 4v10" />
+          <path d="M8 10l4 4l4-4" />
+          <path d="M4 19h16" />
+        </svg>
+      </span>
+    </button>
   );
 };
 

@@ -1,96 +1,60 @@
-import React from "react";
 import "./about.css";
-import DownloadButton from "../../components/DownloadButton/DownloadButton";
-import ExperienceTimeline from "../../components/ExperienceTimeline/ExperienceTimeline";
-
-// Helper function to convert a number to its word representation
-const numberToWords = (num) => {
-  const words = [
-    "zero",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-    "ten",
-    "eleven",
-    "twelve",
-    "thirteen",
-    "fourteen",
-    "fifteen",
-    "sixteen",
-    "seventeen",
-    "eighteen",
-    "nineteen",
-    "twenty",
-    // You can extend this array for larger numbers if needed
-  ];
-
-  if (num >= 0 && num < words.length) {
-    return words[num];
-  } else {
-    // Fallback: return the number as a string if it's outside our defined range
-    return num.toString();
-  }
-};
 
 const About = () => {
   const startYear = 2022;
   const currentYear = new Date().getFullYear();
+  const experienceYears = currentYear - startYear;
 
-  // This calculates the number of full years passed since the startYear + 1
-  // In 2025, this would be (2025 - 2022) + 1 = 3 + 1 = 4
-  const experienceYearsCalculated = currentYear - startYear + 1;
+  const infoRows = [
+    { label: "Experience", value: `${experienceYears}+ years` },
+    { label: "Current role", value: "Senior Frontend Developer" },
+    { label: "Focus", value: "Frontend architecture and UX quality" },
+    { label: "Team style", value: "Collaborative, product-driven delivery" },
+  ];
+
+  const coreSkills = ["React", "Next.js", "TypeScript", "Vue", "Nuxt", "Node.js", "Express.js", "Design Systems", "Performance"];
 
   return (
-    <section className="about-container-main container">
-      <div class="main-title">
-        <h2>
-          About <span>me</span>
-          <span class="bg-text">my stats</span>
-        </h2>
-      </div>
-      <div className="about-container">
-        <div className="about-left">
-          <h4>Information About Me</h4>
-          <p>
-            I am a results-oriented Senior Web Frontend Developer with nearly{" "}
-            {numberToWords(experienceYearsCalculated)}{" "}
-            {/* Use the helper function here */}
-            years of hands-on experience in building robust applications using
-            modern frontend technologies like React.js, Vue.js, and Nuxt.js. My
-            expertise spans across designing and implementing scalable user
-            interfaces, collaborating within cross-functional teams, and
-            delivering high-quality software that enhances customer
-            satisfaction.
+    <section className="about-section">
+      <div className="about-layout">
+        <header className="about-primary" data-animate>
+          <p className="about-eyebrow">About</p>
+          <h2 className="about-title">I build reliable interfaces that help teams ship with confidence.</h2>
+          <p className="about-support">
+            Frontend engineer focused on clean architecture, thoughtful UX, and steady delivery from idea to production.
           </p>
-          <p>
-            Throughout my career, I have demonstrated a strong track record in
-            leading frontend projects, mentoring junior developers, and
-            optimizing web performance. I am skilled in translating complex
-            Figma designs into smooth, responsive UI and integrating advanced
-            APIs for real-time data interaction. Currently, I am employed as a
-            Senior Web Frontend Developer at Better HR Company, where I continue
-            to contribute to innovative web experiences.
-          </p>
-          <DownloadButton />
-        </div>
-        {/* <div className="about-right">
-          <div className="experience-year">
-            <h4>{experienceYears}+</h4>
-            <div className="experience-text">
-              Years Of <br />
-              Experience
+        </header>
+
+        <aside className="about-secondary" data-animate>
+          <section className="about-story">
+            <h3>My Story</h3>
+            <p>
+              I started with infrastructure and transitioned into product engineering, where I now lead frontend work
+              and help teams deliver maintainable, user-focused web experiences.
+            </p>
+          </section>
+
+          <dl className="about-info-list">
+            {infoRows.map((item, index) => (
+              <div key={item.label} className="about-info-row" data-stagger-item style={{ "--stagger-index": index }}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <section className="about-skills">
+            <h4>Core Skills</h4>
+            <div className="about-skill-list">
+              {coreSkills.map((skill, index) => (
+                <span key={skill} className="about-skill-chip" data-stagger-item style={{ "--stagger-index": index }}>
+                  {skill}
+                </span>
+              ))}
             </div>
-          </div>
-          <div></div>
-        </div> */}
+          </section>
+        </aside>
       </div>
-      <ExperienceTimeline />
     </section>
   );
 };
