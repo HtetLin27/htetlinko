@@ -7,15 +7,20 @@ import Projects from "../../pages/Projects/Projects";
 import Certificates from "../../pages/Certificates/Certificates";
 import Contact from "../../pages/Contact/Contact";
 import ExperienceTimeline from "../ExperienceTimeline/ExperienceTimeline";
+import { portfolioData } from "../../data/portfolio";
 
-const sectionItems = [
-  { id: "hero", component: Hero },
-  { id: "about", component: About },
-  { id: "experience", component: ExperienceTimeline },
-  { id: "projects", component: Projects },
-  { id: "certificates", component: Certificates },
-  { id: "contact", component: Contact },
-];
+const sectionComponentMap = {
+  hero: Hero,
+  about: About,
+  experience: ExperienceTimeline,
+  projects: Projects,
+  certificates: Certificates,
+  contact: Contact,
+};
+
+const sectionItems = portfolioData.sections
+  .map((id) => ({ id, component: sectionComponentMap[id] }))
+  .filter((item) => item.component);
 
 const THEME_STORAGE_KEY = "portfolio-theme";
 
@@ -29,7 +34,7 @@ const getInitialTheme = () => {
     return storedTheme;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light";
 };
 
 const Layout = () => {
@@ -109,15 +114,6 @@ const Layout = () => {
 
   return (
     <div className="site-layout">
-      <button
-        type="button"
-        className="layout-theme-toggle"
-        onClick={handleThemeToggle}
-        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      >
-        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-      </button>
-
       <main>
         {sectionItems.map((section) => {
           const SectionComponent = section.component;
@@ -131,34 +127,10 @@ const Layout = () => {
       </main>
 
       <div className="menu-lists">
-        <Menu activeSection={activeSection} />
+        <Menu activeSection={activeSection} theme={theme} onThemeToggle={handleThemeToggle} />
       </div>
     </div>
   );
 };
-
-function SunIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9">
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2.5v3" />
-      <path d="M12 18.5v3" />
-      <path d="M4.5 12h3" />
-      <path d="M16.5 12h3" />
-      <path d="M5.8 5.8l2.2 2.2" />
-      <path d="M16 16l2.2 2.2" />
-      <path d="M5.8 18.2L8 16" />
-      <path d="M16 8l2.2-2.2" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9">
-      <path d="M20 14.2A8.3 8.3 0 119.8 4A6.7 6.7 0 0020 14.2z" />
-    </svg>
-  );
-}
 
 export default Layout;

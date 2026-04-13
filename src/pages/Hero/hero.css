@@ -133,26 +133,20 @@
 .hero-btn-primary {
   color: var(--accent-contrast);
   background: var(--accent);
-  box-shadow: 0 10px 20px color-mix(in srgb, var(--accent) 26%, transparent);
 }
 
 .hero-btn-primary:hover {
   background: var(--accent-strong);
 }
 
-.hero-download-btn {
-  background: var(--surface-2) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--surface-border-strong) !important;
-  box-shadow: none !important;
+.hero-btn-secondary {
+  background: var(--surface-2);
+  color: var(--text-primary);
+  border: 1px solid var(--surface-border-strong);
 }
 
-.hero-download-btn .download-btn-icon {
-  background: var(--button-ghost-icon-bg);
-}
-
-.hero-download-btn:hover {
-  border-color: var(--accent) !important;
+.hero-btn-secondary:hover {
+  border-color: var(--accent);
 }
 
 .hero-pills {
@@ -292,8 +286,7 @@
     gap: 0.62rem;
   }
 
-  .hero-btn,
-  .hero-download-btn {
+  .hero-btn {
     width: 100%;
     max-width: 330px;
     min-height: 48px;

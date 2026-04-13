@@ -1,46 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { portfolioData } from "../../data/portfolio";
 import "./ExperienceTimeline.css";
 
-const experiences = [
-  {
-    id: 3,
-    year: "2023",
-    role: "Senior Frontend Developer",
-    company: "Better HR",
-    location: "Yangon, Myanmar",
-    img: "/betterhr.jpg",
-    period: "Nov 2023 - Present",
-    description:
-      "Leading frontend initiatives, mentoring engineers, and improving architecture quality across product surfaces.",
-    skills: ["Vue.js", "Nuxt.js", "TypeScript", "Leadership", "Code Review"],
-  },
-  {
-    id: 2,
-    year: "2022",
-    role: "Junior Web Frontend Developer",
-    company: "Better HR",
-    location: "Yangon, Myanmar",
-    img: "/betterhr.jpg",
-    period: "Sep 2022 - Nov 2023",
-    description:
-      "Delivered responsive features, partnered with product teams, and built reusable UI systems for core modules.",
-    skills: ["React", "JavaScript", "HTML/CSS", "REST APIs", "Git"],
-  },
-  {
-    id: 1,
-    year: "2019",
-    role: "Network Engineer",
-    company: "Frontiir",
-    location: "Mandalay, Myanmar",
-    img: "/frontiir.jpeg",
-    period: "Jan 2019 - Feb 2022",
-    description:
-      "Managed infrastructure reliability and operations, building the foundation for a move into software engineering.",
-    skills: ["Network Security", "Infrastructure", "Troubleshooting", "System Administration"],
-  },
-];
-
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+const experienceSection = portfolioData.experience;
+const experiences = experienceSection.items;
 
 const ExperienceTimeline = () => {
   const sectionRef = useRef(null);
@@ -48,7 +12,6 @@ const ExperienceTimeline = () => {
   const trackRef = useRef(null);
   const previousProgressRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState("down");
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -68,7 +31,6 @@ const ExperienceTimeline = () => {
         track.style.transform = "translate3d(0, 0, 0)";
         section.style.setProperty("--timeline-progress", "0");
         setActiveIndex(0);
-        setDirection("down");
         previousProgressRef.current = 0;
         return;
       }
@@ -86,12 +48,6 @@ const ExperienceTimeline = () => {
       track.style.transform = reducedMotionQuery.matches ? "translate3d(0, 0, 0)" : `translate3d(${-translateX}px, 0, 0)`;
 
       setActiveIndex(nextIndex);
-
-      if (progress > previousProgressRef.current + 0.0005) {
-        setDirection("down");
-      } else if (progress < previousProgressRef.current - 0.0005) {
-        setDirection("up");
-      }
 
       previousProgressRef.current = progress;
     };
@@ -126,13 +82,11 @@ const ExperienceTimeline = () => {
   return (
     <section ref={sectionRef} className="timeline-section" style={{ "--timeline-scroll-span": scrollSpan }}>
       <div className="timeline-sticky">
-        <div className="timeline-shell">
+        <div className="timeline-shell container">
           <header className="timeline-header" data-animate>
-            <p className="timeline-eyebrow">Experience</p>
-            <h2 className="timeline-title">Career progression, one milestone at a time.</h2>
-            <p className="timeline-copy">
-              Scroll down to move from newest to oldest. Each step gets full focus so the journey feels clear and intentional.
-            </p>
+            <p className="timeline-eyebrow">{experienceSection.eyebrow}</p>
+            <h2 className="timeline-title">{experienceSection.title}</h2>
+            <p className="timeline-copy">{experienceSection.copy}</p>
           </header>
 
           <div className="timeline-stage">
@@ -178,9 +132,9 @@ const ExperienceTimeline = () => {
 
             <div className="timeline-navigation" data-animate>
               <div className="timeline-navigation-top">
-                <p className={`timeline-direction is-${direction}`}>
-                  {direction === "down" ? "Scrolling Down" : "Scrolling Up"}
-                </p>
+                {/* <p className={`timeline-direction is-${direction}`}>
+                  {direction === "down" ? experienceSection.directionLabel.down : experienceSection.directionLabel.up}
+                </p> */}
                 <p className="timeline-active-label">
                   {activeIndex + 1} / {experiences.length} · {activeExperience.role}
                 </p>

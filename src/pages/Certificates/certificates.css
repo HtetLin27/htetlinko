@@ -194,7 +194,6 @@
 
 .cert-mini-card.is-active {
   border-color: var(--accent);
-  box-shadow: inset 0 0 0 1px var(--accent-outline);
 }
 
 .cert-mini-card img {

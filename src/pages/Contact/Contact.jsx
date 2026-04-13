@@ -1,12 +1,11 @@
 import { useState } from "react";
+import { portfolioData } from "../../data/portfolio";
 import "./contact.css";
 
-const socials = [
-  { name: "github", url: "https://github.com/HtetLin27" },
-  { name: "linkedin", url: "https://www.linkedin.com/in/htet-lin-ko-411b02204/" },
-];
-
 export default function Contact() {
+  const contact = portfolioData.contact;
+  const { header, form, details, socials } = contact;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,44 +21,31 @@ export default function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const recipient = "htetlinko.dev@gmail.com";
-    const subject = encodeURIComponent(`${formData.subject} - from ${formData.name}`);
-    const body = encodeURIComponent(`${formData.message}\n\nReply to: ${formData.email}`);
+    const subject = encodeURIComponent(`${formData.subject} - ${form.subjectSuffix} ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n${form.replyPrefix} ${formData.email}`);
 
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${form.recipient}?subject=${subject}&body=${body}`;
   };
 
   return (
     <section className="contact-wrap container">
       <header className="contact-header" data-animate>
-        <p className="section-kicker">Contact</p>
-        <h2 className="section-heading">Let&apos;s build something valuable together.</h2>
-        <p className="section-copy">
-          Open to new opportunities, freelance collaborations, and frontend engineering discussions.
-        </p>
+        <p className="section-kicker">{header.kicker}</p>
+        <h2 className="section-heading">{header.heading}</h2>
+        <p className="section-copy">{header.copy}</p>
       </header>
 
       <div className="contact-grid">
         <article className="contact-info glass-card" data-animate>
-          <h3>Get in touch</h3>
+          <h3>{contact.infoTitle}</h3>
 
           <ul className="contact-details">
-            <li>
-              <span>Location</span>
-              <p>Yangon, Myanmar</p>
-            </li>
-            <li>
-              <span>Email</span>
-              <p>htetlinko.dev@gmail.com</p>
-            </li>
-            <li>
-              <span>Education</span>
-              <p>Technological University</p>
-            </li>
-            <li>
-              <span>Languages</span>
-              <p>Myanmar, English</p>
-            </li>
+            {details.map((detail) => (
+              <li key={detail.label}>
+                <span>{detail.label}</span>
+                <p>{detail.value}</p>
+              </li>
+            ))}
           </ul>
 
           <div className="contact-socials">
@@ -70,73 +56,73 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-social-link"
-                aria-label={social.name}
+                aria-label={social.label}
                 data-stagger-item
                 style={{ "--stagger-index": index }}
               >
                 <SocialIcon name={social.name} />
-                <span>{social.name}</span>
+                <span>{social.label}</span>
               </a>
             ))}
           </div>
         </article>
 
         <article className="contact-form-box glass-card" data-animate>
-          <h3>Send a message</h3>
+          <h3>{form.title}</h3>
 
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="contact-row">
               <label>
-                Name
+                {form.labels.name}
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Your name"
+                  placeholder={form.placeholders.name}
                   required
                 />
               </label>
 
               <label>
-                Email
+                {form.labels.email}
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="you@example.com"
+                  placeholder={form.placeholders.email}
                   required
                 />
               </label>
             </div>
 
             <label>
-              Subject
+              {form.labels.subject}
               <input
                 type="text"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                placeholder="Project discussion"
+                placeholder={form.placeholders.subject}
                 required
               />
             </label>
 
             <label>
-              Message
+              {form.labels.message}
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Tell me about your project"
+                placeholder={form.placeholders.message}
                 rows={6}
                 required
               />
             </label>
 
             <button type="submit" className="contact-submit-btn">
-              Send Message
+              {form.submit}
               <SendIcon />
             </button>
           </form>

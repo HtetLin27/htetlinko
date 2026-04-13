@@ -1,24 +1,11 @@
 import { useEffect, useId, useRef } from "react";
-import DownloadButton from "../../components/DownloadButton/DownloadButton";
+import { portfolioData } from "../../data/portfolio";
 import "./hero.css";
-
-const HERO_CONTENT = {
-  badge: "Senior Frontend Developer · Better HR",
-  name: "Htet Lin Ko",
-  headline: "I craft thoughtful web experiences that turn complexity into clarity.",
-  subtext:
-    "4+ years building production-grade interfaces with React, Vue, Nuxt, and TypeScript from concept to release.",
-  ctaPrimary: "Explore Projects",
-  ctaSecondary: "Download CV",
-  availability: "Open to impactful frontend roles and collaborations",
-};
-
-const techPills = ["React", "TypeScript", "Vue", "Nuxt", "Design Systems"];
-const HERO_RING_TEXT = "HTET LIN KO • SENIOR FRONTEND DEVELOPER • PRODUCT-FOCUSED FRONTEND ENGINEER • ";
 
 const Hero = () => {
   const heroRef = useRef(null);
   const ringPathId = useId();
+  const hero = portfolioData.hero;
 
   useEffect(() => {
     const section = heroRef.current;
@@ -70,20 +57,22 @@ const Hero = () => {
 
       <div className="hero-layout container">
         <div className="hero-copy" data-animate>
-          <p className="hero-badge">{HERO_CONTENT.badge}</p>
-          <p className="hero-name">{HERO_CONTENT.name}</p>
-          <h1 className="hero-title">{HERO_CONTENT.headline}</h1>
-          <p className="hero-subtext">{HERO_CONTENT.subtext}</p>
+          <p className="hero-badge">{hero.badge}</p>
+          <p className="hero-name">{hero.name}</p>
+          <h1 className="hero-title">{hero.headline}</h1>
+          <p className="hero-subtext">{hero.summary}</p>
 
           <div className="hero-actions" data-animate>
-            <a href="#projects" className="hero-btn hero-btn-primary">
-              {HERO_CONTENT.ctaPrimary}
+            <a href={hero.primaryCta.href} className="hero-btn hero-btn-primary">
+              {hero.primaryCta.label}
             </a>
-            <DownloadButton label={HERO_CONTENT.ctaSecondary} className="hero-download-btn" />
+            <a href={hero.secondaryCta.href} className="hero-btn hero-btn-secondary">
+              {hero.secondaryCta.label}
+            </a>
           </div>
 
           <div className="hero-pills" aria-label="Core stack" data-animate>
-            {techPills.map((item) => (
+            {hero.stack.map((item) => (
               <span key={item} className="hero-pill">
                 {item}
               </span>
@@ -99,15 +88,15 @@ const Hero = () => {
                 <path id={ringPathId} d="M50,50 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0" />
               </defs>
               <text>
-                <textPath href={`#${ringPathId}`}>{HERO_RING_TEXT.repeat(2)}</textPath>
+                <textPath href={`#${ringPathId}`}>{hero.ringText.repeat(2)}</textPath>
               </text>
             </svg>
             <figure className="hero-portrait-frame">
-              <img src="/hero-portrait.webp" alt="Portrait of Htet Lin Ko" className="hero-portrait" loading="eager" />
+              <img src={hero.portrait.src} alt={hero.portrait.alt} className="hero-portrait" loading="eager" />
             </figure>
           </div>
 
-          <p className="hero-availability">{HERO_CONTENT.availability}</p>
+          <p className="hero-availability">{hero.availability}</p>
         </div>
       </div>
     </section>

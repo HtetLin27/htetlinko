@@ -55,13 +55,11 @@
 }
 
 .timeline-shell {
-  width: 100%;
   min-height: 100%;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: clamp(0.9rem, 2.3vh, 1.4rem);
   padding-block: clamp(1rem, 2.7vh, 2.1rem);
-  padding-inline: clamp(1rem, 3.6vw, 3rem) clamp(6rem, 8vw, 8.4rem);
 }
 
 .timeline-header {
@@ -460,7 +458,6 @@
   }
 
   .timeline-shell {
-    padding-inline: 1rem;
     padding-block: 1.5rem;
   }
 

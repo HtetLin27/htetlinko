@@ -10,12 +10,10 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding-inline: clamp(1.2rem, 5.3vw, 5.8rem);
   padding-block: clamp(1rem, 2.2vh, 1.8rem);
 }
 
 .about-layout {
-  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
   align-items: center;

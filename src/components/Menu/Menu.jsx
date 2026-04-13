@@ -1,71 +1,58 @@
-import { useState } from "react";
+import { portfolioData } from "../../data/portfolio";
 import "./menu.css";
 
-const menuItems = [
-  { id: "hero", label: "Home", icon: <HomeIcon /> },
-  { id: "about", label: "About", icon: <UserIcon /> },
-  { id: "experience", label: "Experience", icon: <TimelineIcon /> },
-  { id: "projects", label: "Projects", icon: <CodeIcon /> },
-  { id: "certificates", label: "Certificates", icon: <BadgeIcon /> },
-  { id: "contact", label: "Contact", icon: <MailIcon /> },
-];
+const iconMap = {
+  home: HomeIcon,
+  user: UserIcon,
+  timeline: TimelineIcon,
+  code: CodeIcon,
+  badge: BadgeIcon,
+  mail: MailIcon,
+};
 
-const Menu = ({ activeSection }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+const Menu = ({ activeSection, theme, onThemeToggle }) => {
+  const { items } = portfolioData.navigation;
+  const themeToggleLabel = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+  const themeLabel = theme === "dark" ? "Light mode" : "Dark mode";
 
   return (
-    <div className="menu-wrapper">
-      <button
-        type="button"
-        className="menu-toggle"
-        aria-expanded={isOpen}
-        aria-label="Toggle navigation"
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {isOpen ? <CloseIcon /> : <MenuIcon />}
-      </button>
+    <div className="menu-cluster">
+      <div className="menu-cluster-main">
+        <nav className="menu-cluster-nav" aria-label="Section navigation">
+          {items.map((item) => {
+            const Icon = iconMap[item.icon] ?? HomeIcon;
 
-      <nav className={`menu-panel ${isOpen ? "is-open" : ""}`}>
-        {menuItems.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className={`menu-link ${activeSection === item.id ? "is-active" : ""}`}
-            onClick={closeMenu}
-            aria-label={item.label}
-          >
-            <span className="menu-link-icon">{item.icon}</span>
-            <span className="menu-link-label">{item.label}</span>
-          </a>
-        ))}
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`menu-cluster-item ${activeSection === item.id ? "is-active" : ""}`}
+                aria-label={item.label}
+              >
+                <span className="menu-cluster-item-icon">
+                  <Icon />
+                </span>
+                <span className="menu-cluster-item-label">{item.label}</span>
+              </a>
+            );
+          })}
+        </nav>
 
-      </nav>
+        <div className="menu-cluster-divider" aria-hidden="true" />
+
+        <button
+          type="button"
+          className="menu-cluster-item menu-cluster-theme-toggle"
+          onClick={onThemeToggle}
+          aria-label={themeToggleLabel}
+        >
+          <span className="menu-cluster-item-icon">{theme === "dark" ? <SunIcon /> : <MoonIcon />}</span>
+          <span className="menu-cluster-item-label">{themeLabel}</span>
+        </button>
+      </div>
     </div>
   );
 };
-
-function MenuIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M4 7h16" />
-      <path d="M4 12h16" />
-      <path d="M4 17h16" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M6 6l12 12" />
-      <path d="M18 6l-12 12" />
-    </svg>
-  );
-}
 
 function HomeIcon() {
   return (
@@ -120,6 +107,30 @@ function MailIcon() {
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9">
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="M3 8l9 6l9-6" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2.5v3" />
+      <path d="M12 18.5v3" />
+      <path d="M4.5 12h3" />
+      <path d="M16.5 12h3" />
+      <path d="M5.8 5.8l2.2 2.2" />
+      <path d="M16 16l2.2 2.2" />
+      <path d="M5.8 18.2L8 16" />
+      <path d="M16 8l2.2-2.2" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9">
+      <path d="M20 14.2A8.3 8.3 0 119.8 4A6.7 6.7 0 0020 14.2z" />
     </svg>
   );
 }
