@@ -1,262 +1,135 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { portfolioData } from "../../data/portfolio";
 import "./ExperienceTimeline.css";
 
-const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-
-const experienceSection = portfolioData.experience;
-const experiences = experienceSection.items;
-
-// S-curve path through the SVG canvas
-const PATH_D =
-  "M 0,50 C 80,50 140,14 260,14 C 380,14 440,86 560,86 C 680,86 740,14 860,14 C 940,14 960,50 1000,50";
-
-// approximate fractional positions along the path for each node
-const NODE_FRACTIONS = experiences.map((_, i) => {
-  if (experiences.length === 1) return 0.5;
-  return 0.22 + (i / (experiences.length - 1)) * 0.56;
-});
+const { eyebrow, title, copy, items } = portfolioData.experience;
 
 export default function ExperienceTimeline() {
-  const sectionRef = useRef(null);
-  const bgPathRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [pathLength, setPathLength] = useState(0);
-  const [nodePoints, setNodePoints] = useState([]);
-  const [isCompact, setIsCompact] = useState(
-    typeof window !== "undefined" ? window.matchMedia("(max-width: 900px)").matches : false
-  );
+  const outerRef = useRef(null);
+  const trackRef = useRef(null);
+  const progressRef = useRef(null);
 
-  // measure path and compute node positions
   useEffect(() => {
-    const path = bgPathRef.current;
-    if (!path) return;
-    const len = path.getTotalLength();
-    setPathLength(len);
-    setNodePoints(
-      NODE_FRACTIONS.map((f) => {
-        const pt = path.getPointAtLength(f * len);
-        return { x: pt.x, y: pt.y };
-      })
-    );
-  }, []);
+    // Skip on mobile — vertical layout
+    if (window.innerWidth < 768) return;
 
-  // responsive breakpoint
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 900px)");
-    const onChange = (e) => setIsCompact(e.matches);
-    setIsCompact(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  // scroll → active index
-  useEffect(() => {
-    if (isCompact) return;
-    const section = sectionRef.current;
-    if (!section) return;
-    let rafId = null;
-
-    const update = () => {
-      const rect = section.getBoundingClientRect();
-      const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
-      const progress = clamp(-rect.top / scrollDistance, 0, 1);
-      const next = clamp(Math.round(progress * (experiences.length - 1)), 0, experiences.length - 1);
-      setActiveIndex(next);
-    };
+    let rafId;
+    let current = 0;
+    let target = 0;
 
     const onScroll = () => {
-      if (rafId !== null) return;
-      rafId = window.requestAnimationFrame(() => { update(); rafId = null; });
+      const outer = outerRef.current;
+      const track = trackRef.current;
+      if (!outer || !track) return;
+
+      const { top, height } = outer.getBoundingClientRect();
+      const scrollable = height - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -top / scrollable));
+
+      const maxTranslate = track.scrollWidth - window.innerWidth;
+      target = progress * Math.max(0, maxTranslate);
+
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      }
     };
 
-    update();
+    const tick = () => {
+      // Lerp for smooth inertia feel
+      current += (target - current) * 0.085;
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translateX(-${current}px)`;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    rafId = requestAnimationFrame(tick);
+    onScroll(); // sync on mount
+
     return () => {
-      if (rafId !== null) window.cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(rafId);
     };
-  }, [isCompact]);
-
-  const scrollSpan = `${(experiences.length - 1) * 100}svh`;
-  const activeFraction = NODE_FRACTIONS[activeIndex] ?? 0;
-  const progressDashoffset = pathLength > 0 ? pathLength * (1 - activeFraction) : pathLength;
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="timeline-section"
-      style={{ "--timeline-scroll-span": scrollSpan }}
-    >
-      <div className="timeline-sticky">
-        <div className="timeline-shell container">
+    <div className="exp-outer" ref={outerRef}>
+      <div className="exp-sticky">
+        {/* Header — stays pinned at top */}
+        <header className="exp-header container" data-animate>
+          <p className="exp-eyebrow">{eyebrow}</p>
+          <h2 className="exp-title">{title}</h2>
+          <p className="exp-copy">{copy}</p>
+          <p className="exp-hint" aria-hidden="true">Scroll to explore →</p>
+        </header>
 
-          {/* ── Header ── */}
-          <header className="timeline-header" data-animate>
-            <p className="timeline-eyebrow">{experienceSection.eyebrow}</p>
-            <h2 className="timeline-title">{experienceSection.title}</h2>
-            <p className="timeline-copy">{experienceSection.copy}</p>
-          </header>
+        {/* Horizontal track */}
+        <div className="exp-track-wrapper">
+          <div className="exp-track" ref={trackRef}>
+            {/* Lead spacer aligns first card with container gutter */}
+            <div className="exp-track-lead" aria-hidden="true" />
 
-          {isCompact ? (
-            /* ── Mobile: stacked cards ── */
-            <div className="timeline-mobile-list">
-              {experiences.map((exp) => (
-                <article key={exp.id} className="timeline-card timeline-card--visible">
-                  <CardContent exp={exp} />
-                </article>
-              ))}
-            </div>
-          ) : (
-            /* ── Desktop: SVG path + card ── */
-            <div className="timeline-body">
-
-              {/* SVG path with nodes */}
-              <div className="timeline-path-wrap" data-animate>
-                <svg
-                  className="timeline-path-svg"
-                  viewBox="0 0 1000 100"
-                  preserveAspectRatio="xMidYMid meet"
-                  aria-hidden="true"
+            {items.map((item, i) => {
+              const isCurrent = i === 0;
+              return (
+                <article
+                  key={item.id}
+                  className={`exp-card glass-card${isCurrent ? " exp-card--current" : ""}`}
                 >
-                  {/* background path */}
-                  <path
-                    ref={bgPathRef}
-                    d={PATH_D}
-                    fill="none"
-                    stroke="var(--surface-border-strong)"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
+                  {isCurrent && <div className="exp-card-strip" aria-hidden="true" />}
 
-                  {/* progress path */}
-                  {pathLength > 0 && (
-                    <path
-                      d={PATH_D}
-                      fill="none"
-                      stroke="url(#pathGrad)"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeDasharray={pathLength}
-                      strokeDashoffset={progressDashoffset}
-                      className="timeline-path-progress"
-                    />
-                  )}
+                  <div className="exp-card-inner">
+                    {/* Chapter label */}
+                    <div className="exp-card-meta">
+                      <span className="exp-chapter-num">{item.chapterNum}</span>
+                      <span className="exp-chapter-sep" aria-hidden="true">/</span>
+                      <span className="exp-chapter-label">{item.chapterLabel}</span>
+                      {isCurrent && <span className="exp-badge">Current</span>}
+                    </div>
 
-                  <defs>
-                    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="var(--accent)" />
-                      <stop offset="100%" stopColor="var(--accent-secondary)" />
-                    </linearGradient>
-                    <filter id="nodeGlow">
-                      <feGaussianBlur stdDeviation="3" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
+                    {/* Role + company */}
+                    <div className="exp-role-block">
+                      <h3 className="exp-role">{item.role}</h3>
+                      <p className="exp-company">
+                        <span className="exp-company-name">{item.company}</span>
+                        <span className="exp-sep" aria-hidden="true">·</span>
+                        {item.location}
+                      </p>
+                      <span className="exp-period">{item.period}</span>
+                    </div>
 
-                  {/* nodes */}
-                  {nodePoints.map((pt, i) => {
-                    const isPast = i < activeIndex;
-                    const isActive = i === activeIndex;
-                    return (
-                      <g key={i} className={`timeline-node ${isActive ? "is-active" : isPast ? "is-past" : ""}`}>
-                        {/* outer pulse ring */}
-                        {isActive && (
-                          <circle
-                            cx={pt.x}
-                            cy={pt.y}
-                            r="18"
-                            fill="rgba(59,130,246,0.12)"
-                            className="timeline-node-pulse"
-                          />
-                        )}
-                        {/* glow ring */}
-                        <circle
-                          cx={pt.x}
-                          cy={pt.y}
-                          r="11"
-                          fill="var(--surface-2)"
-                          stroke={isActive || isPast ? "var(--accent)" : "var(--surface-border-strong)"}
-                          strokeWidth="1.5"
-                          filter={isActive ? "url(#nodeGlow)" : undefined}
-                        />
-                        {/* inner dot */}
-                        <circle
-                          cx={pt.x}
-                          cy={pt.y}
-                          r="5"
-                          fill={isActive ? "var(--accent)" : isPast ? "var(--accent-secondary)" : "var(--surface-border-strong)"}
-                        />
-                        {/* year label */}
-                        <text
-                          x={pt.x}
-                          y={pt.y > 50 ? pt.y + 26 : pt.y - 20}
-                          textAnchor="middle"
-                          className="timeline-node-label"
-                          fill={isActive ? "var(--accent)" : "var(--text-soft)"}
-                        >
-                          {experiences[i].year}
-                        </text>
-                      </g>
-                    );
-                  })}
-                </svg>
-              </div>
+                    {/* Core message */}
+                    <p className="exp-core-msg">{item.coreMessage}</p>
 
-              {/* card stack */}
-              <div className="timeline-card-stage">
-                {experiences.map((exp, index) => (
-                  <article
-                    key={exp.id}
-                    className={`timeline-card ${index === activeIndex ? "is-active" : index < activeIndex ? "is-past" : "is-future"}`}
-                  >
-                    <CardContent exp={exp} />
-                  </article>
-                ))}
-              </div>
+                    {/* Bullets */}
+                    <ul className="exp-bullets">
+                      {item.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
 
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
-  );
-}
+                    {/* Stack chips */}
+                    <ul className="exp-stack" aria-label="Technologies used">
+                      {item.stack.map((s) => (
+                        <li key={s}>{s}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })}
 
-function CardContent({ exp }) {
-  return (
-    <>
-      <div className="timeline-card-strip" />
-      <div className="timeline-card-body">
-        <div className="timeline-card-top">
-          <div className="timeline-card-meta">
-            <img src={exp.img} alt={exp.company} className="timeline-logo" loading="lazy" />
-            <div>
-              <p className="timeline-card-company-name">{exp.company}</p>
-              <p className="timeline-card-location">{exp.location}</p>
-            </div>
+            {/* Tail spacer */}
+            <div className="exp-track-tail" aria-hidden="true" />
           </div>
-          <span className="timeline-card-period">{exp.period}</span>
         </div>
 
-        <div className="timeline-card-role-wrap">
-          <span className="timeline-card-year-ghost">{exp.year}</span>
-          <h3 className="timeline-card-role">{exp.role}</h3>
-        </div>
-
-        <p className="timeline-card-description">{exp.description}</p>
-
-        <div className="timeline-card-skills">
-          {exp.skills.map((skill) => (
-            <span key={skill}>{skill}</span>
-          ))}
+        {/* Scroll progress bar */}
+        <div className="exp-progress-bar" aria-hidden="true">
+          <div className="exp-progress-fill" ref={progressRef} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

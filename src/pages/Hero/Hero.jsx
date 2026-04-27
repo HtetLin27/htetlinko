@@ -58,8 +58,10 @@ const Hero = () => {
       <div className="hero-layout container">
         <div className="hero-copy" data-animate>
           <p className="hero-badge">{hero.badge}</p>
-          <p className="hero-name">{hero.name}</p>
-          <h1 className="hero-title">{hero.headline}</h1>
+          <h1 className="hero-name-heading">
+            <span className="hero-name">{hero.name},</span>
+            <span className="hero-title">{hero.headline}</span>
+          </h1>
           <p className="hero-subtext">{hero.summary}</p>
 
           <div className="hero-actions" data-animate>

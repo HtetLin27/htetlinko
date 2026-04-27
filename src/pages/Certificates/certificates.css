@@ -83,8 +83,8 @@
   border-radius: 14px;
   background: linear-gradient(
     to top,
-    rgba(6, 8, 16, 0.92) 0%,
-    rgba(6, 8, 16, 0.5) 45%,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.42) 45%,
     transparent 100%
   );
   display: flex;
@@ -111,13 +111,13 @@
 .cert-item-title {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #e8edf8;
+  color: #f0ece6;
   line-height: 1.35;
 }
 
 .cert-item-date {
   font-size: 0.68rem;
-  color: rgba(232, 237, 248, 0.55);
+  color: rgba(240, 236, 230, 0.6);
   font-weight: 500;
 }
 
