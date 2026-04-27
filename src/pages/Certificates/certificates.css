@@ -1,257 +1,166 @@
-.cert-showcase {
+.cert-section {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.5rem;
 }
 
-.cert-showcase-header {
+.cert-header {
   max-width: 760px;
 }
 
-.cert-showcase-toolbar {
+/* ── Filter chips ── */
+.cert-filters {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.9rem;
-  padding: 0.8rem;
-}
-
-.cert-chip-group {
-  display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
-.cert-chip {
+.cert-filter-chip {
   border-radius: 999px;
   border: 1px solid var(--surface-border-strong);
   background: var(--surface-2);
   color: var(--text-muted);
-  padding: 0.38rem 0.8rem;
+  padding: 0.38rem 0.85rem;
   font-size: 0.76rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.cert-chip:hover {
+.cert-filter-chip:hover {
   color: var(--text-primary);
   border-color: var(--accent);
 }
 
-.cert-chip.is-active {
+.cert-filter-chip.is-active {
   color: var(--accent-contrast);
   border-color: var(--accent);
   background: var(--accent);
 }
 
-.cert-page-controller {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--text-soft);
-  font-size: 0.8rem;
-  white-space: nowrap;
-}
-
-.cert-page-controller button {
-  border-radius: 999px;
-  border: 1px solid var(--surface-border-strong);
-  background: var(--surface-2);
-  color: var(--text-primary);
-  padding: 0.34rem 0.78rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.cert-page-controller button:hover:not(:disabled) {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.cert-page-controller button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.cert-showcase-main {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 0.95rem;
-}
-
-.cert-preview {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.cert-preview-media {
-  position: relative;
-  min-height: 320px;
-  border-bottom: 1px solid var(--surface-border);
-  background: var(--image-stage-bg);
-}
-
-.cert-preview-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 0.5rem;
-}
-
-.cert-preview-media span {
-  position: absolute;
-  top: 0.72rem;
-  right: 0.72rem;
-  border-radius: 999px;
-  border: 1px solid var(--surface-border-strong);
-  background: var(--surface-2);
-  color: var(--accent);
-  font-size: 0.73rem;
-  font-weight: 700;
-  padding: 0.32rem 0.62rem;
-}
-
-.cert-preview-content {
-  padding: 0.95rem 1rem 1.05rem;
-}
-
-.cert-preview-content p {
-  color: var(--accent);
+.cert-count {
+  margin-left: auto;
   font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.cert-preview-content h3 {
-  margin-top: 0.35rem;
-  font-family: "Lora", "Times New Roman", serif;
-  font-size: clamp(1.08rem, 2.1vw, 1.5rem);
-  line-height: 1.34;
-}
-
-.cert-preview-content small {
-  display: block;
-  margin-top: 0.54rem;
   color: var(--text-soft);
-  font-size: 0.82rem;
-  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
-.cert-empty-state {
-  padding: 1.15rem;
-  color: var(--text-soft);
+/* ── Masonry gallery ── */
+.cert-gallery {
+  columns: 4;
+  column-gap: 0.75rem;
 }
 
-.cert-navigator {
-  padding: 0.95rem;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.cert-navigator h3 {
-  font-family: "Lora", "Times New Roman", serif;
-  font-size: 1.12rem;
-}
-
-.cert-navigator > p {
-  margin-top: 0.3rem;
-  color: var(--text-soft);
-  font-size: 0.8rem;
-}
-
-.cert-navigator-list {
-  margin-top: 0.82rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.52rem;
-  overflow: auto;
-  max-height: 455px;
-  padding-right: 0.2rem;
-}
-
-.cert-mini-card {
-  text-align: left;
+/* each item */
+.cert-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  position: relative;
   border-radius: 14px;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-2);
-  padding: 0.44rem;
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  gap: 0.62rem;
+  overflow: hidden;
   cursor: pointer;
-  transition: all 0.2s ease;
+  background: var(--surface-3);
 }
 
-.cert-mini-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--surface-border-strong);
-}
-
-.cert-mini-card.is-active {
-  border-color: var(--accent);
-}
-
-.cert-mini-card img {
+.cert-item img {
   width: 100%;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 9px;
-  border: 1px solid var(--surface-border);
-}
-
-.cert-mini-card h4 {
-  font-size: 0.88rem;
-  line-height: 1.3;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.cert-mini-card span {
   display: block;
-  margin-top: 0.34rem;
-  color: var(--text-soft);
-  font-size: 0.77rem;
+  border-radius: 14px;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-@media (max-width: 1080px) {
-  .cert-showcase-main {
-    grid-template-columns: 1fr;
-  }
+/* hover: scale image slightly */
+.cert-item:hover img {
+  transform: scale(1.04);
+}
 
-  .cert-preview-media {
-    min-height: 280px;
-  }
+/* overlay — hidden by default */
+.cert-item-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(
+    to top,
+    rgba(6, 8, 16, 0.92) 0%,
+    rgba(6, 8, 16, 0.5) 45%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-  .cert-navigator-list {
-    max-height: 300px;
+.cert-item:hover .cert-item-overlay {
+  opacity: 1;
+}
+
+.cert-item-issuer {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+.cert-item-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #e8edf8;
+  line-height: 1.35;
+}
+
+.cert-item-date {
+  font-size: 0.68rem;
+  color: rgba(232, 237, 248, 0.55);
+  font-weight: 500;
+}
+
+/* ── Hover expand: show full cert ── */
+.cert-item.is-hovered {
+  z-index: 50;
+}
+
+/* glow border on hover */
+.cert-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: none;
+}
+
+.cert-item:hover::after {
+  border-color: var(--surface-border-strong);
+  box-shadow: 0 0 0 1px var(--accent-outline), var(--shadow-elevated);
+}
+
+@media (max-width: 1100px) {
+  .cert-gallery {
+    columns: 3;
   }
 }
 
 @media (max-width: 720px) {
-  .cert-showcase-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
+  .cert-gallery {
+    columns: 2;
   }
 
-  .cert-chip-group {
+  .cert-count {
+    margin-left: 0;
     width: 100%;
   }
+}
 
-  .cert-page-controller {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .cert-mini-card {
-    grid-template-columns: 78px 1fr;
-  }
-
-  .cert-mini-card img {
-    height: 58px;
+@media (max-width: 420px) {
+  .cert-gallery {
+    columns: 1;
   }
 }

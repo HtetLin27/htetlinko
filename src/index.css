@@ -49,6 +49,7 @@
   --shadow-soft: 0 14px 34px rgba(74, 63, 53, 0.12);
   --shadow-floating: 0 10px 24px rgba(74, 63, 53, 0.15);
   --shadow-elevated: 0 20px 42px rgba(74, 63, 53, 0.18);
+  --glow-accent: 0 0 28px rgba(93, 84, 75, 0.14);
 
   --menu-toggle-bg: rgba(255, 249, 240, 0.96);
   --menu-panel-bg: rgba(255, 249, 240, 0.95);
@@ -112,6 +113,7 @@
   --shadow-soft: 0 16px 38px rgba(0, 0, 0, 0.45);
   --shadow-floating: 0 12px 26px rgba(0, 0, 0, 0.42);
   --shadow-elevated: 0 22px 52px rgba(0, 0, 0, 0.52);
+  --glow-accent: 0 0 28px rgba(183, 169, 153, 0.18);
 
   --menu-toggle-bg: rgba(38, 33, 28, 0.96);
   --menu-panel-bg: rgba(38, 33, 28, 0.95);
@@ -163,8 +165,10 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(var(--bg-pattern-dot) 0.6px, transparent 0.6px);
-  background-size: 18px 18px;
+  background-image:
+    linear-gradient(var(--bg-pattern-dot) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-pattern-dot) 1px, transparent 1px);
+  background-size: 48px 48px;
   opacity: var(--bg-pattern-opacity);
   z-index: -1;
 }
@@ -236,6 +240,10 @@ button {
   font-size: clamp(2rem, 4.8vw, 3.3rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-copy {
@@ -250,6 +258,11 @@ button {
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-soft);
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--surface-border-strong);
+  box-shadow: var(--shadow-soft), var(--glow-accent);
 }
 
 [data-animate],

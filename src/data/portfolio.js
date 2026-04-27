@@ -66,6 +66,17 @@ export const portfolioData = {
       { label: "Also growing in", value: "Full stack development with Node.js" },
       { label: "Strengths", value: "Collaboration, mentoring, and product delivery" },
     ],
+    stats: [
+      { value: "4+", label: "Years Experience" },
+      { value: "8+", label: "Projects Shipped" },
+      { value: "2", label: "Companies" },
+    ],
+    skillGroups: [
+      { label: "Frontend", skills: ["React", "Next.js", "Vue", "Nuxt", "TypeScript", "JavaScript", "Tailwind CSS"] },
+      { label: "State & Data", skills: ["TanStack Query", "Zustand", "Apollo Client", "GraphQL", "REST APIs", "Axios"] },
+      { label: "Backend", skills: ["Node.js", "Express.js"] },
+      { label: "Tools", skills: ["Git", "Chart.js", "Figma", "Vercel"] },
+    ],
     skillsTitle: "Core Skills",
     skills: [
       "React",
@@ -80,6 +91,8 @@ export const portfolioData = {
       "GraphQL",
       "REST APIs",
       "Apollo Client",
+      "TanStack Query",
+      "Zustand",
       "Axios",
       "Chart.js",
       "Git",
@@ -248,6 +261,54 @@ export const portfolioData = {
         privateProject: true,
       },
       {
+        id: "marketing-site",
+        name: "Better HR Marketing Site",
+        category: "Marketing / CMS",
+        summary:
+          "A public-facing marketing site powered by Next.js and the Notion API as a headless CMS.",
+        role: "Senior Frontend Developer",
+        features: [
+          "Built the full marketing site with Next.js (App Router).",
+          "Integrated Notion API as a headless CMS for content management.",
+          "Implemented static generation with on-demand revalidation.",
+          "Delivered responsive, SEO-optimised pages.",
+        ],
+        tech: ["Next.js", "Notion API", "TypeScript", "Tailwind CSS"],
+        privateProject: true,
+      },
+      {
+        id: "api-debugger",
+        name: "API Debugger (Mini Postman)",
+        category: "Developer Tool",
+        summary:
+          "A full-stack API testing tool built with Next.js and TypeScript — a developer-focused alternative to Postman.",
+        role: "Full Stack Developer",
+        features: [
+          "Implemented request builder and response viewer.",
+          "Built API route handlers and structured client-server interaction.",
+          "Designed developer-focused debugging UI.",
+        ],
+        tech: ["Next.js", "TypeScript", "Node.js"],
+        privateProject: false,
+      },
+      {
+        id: "moviepilot",
+        name: "MoviePilot – MERN Streaming Platform",
+        category: "Full Stack App",
+        summary:
+          "A full-stack MERN streaming platform with authentication, API integration, and dynamic content rendering.",
+        role: "Full Stack Developer",
+        features: [
+          "Built a full-stack streaming platform with authentication and dynamic content rendering.",
+          "Developed backend APIs with Node.js and Express for data flow and business logic.",
+          "Designed responsive UI with React for content browsing and user interaction.",
+          "Integrated MongoDB for data storage and structured API-driven architecture.",
+          "Deployed live application and managed environment configuration for production.",
+        ],
+        tech: ["MongoDB", "Express.js", "React", "Node.js"],
+        privateProject: false,
+      },
+      {
         id: "expense-form-website",
         name: "Expense Management System",
         category: "Internal Workflow Tool",
@@ -396,13 +457,19 @@ export const portfolioData = {
   contact: {
     header: {
       kicker: "Contact",
-      heading: "Let’s build great products together.",
-      copy: "Open to frontend and full stack opportunities.",
+      heading: "Let’s build something great.",
+      copy: "Open to frontend and full stack opportunities — remote or Yangon.",
+    },
+    cta: {
+      emailLabel: "Send an Email",
+      linkedinLabel: "Connect on LinkedIn",
+      availability: "Available for new opportunities",
     },
     infoTitle: "Get in touch",
     details: [
       { label: "Location", value: "Yangon, Myanmar" },
       { label: "Email", value: "htetlinko.dev@gmail.com" },
+      { label: "Phone", value: "+95 9254351761" },
       { label: "Education", value: "Technological University" },
       { label: "Languages", value: "Myanmar, English" },
     ],

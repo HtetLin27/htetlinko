@@ -74,7 +74,7 @@ export default function Projects() {
     };
   }, [isCompact, items.length]);
 
-  const scrollSpan = `${Math.max(1, items.length - 1) * 82}svh`;
+  const scrollSpan = `${Math.max(1, items.length - 1) * 100}svh`;
 
   return (
     <section ref={sectionRef} className="projects-narrative" style={{ "--projects-scroll-span": scrollSpan }}>
@@ -90,62 +90,57 @@ export default function Projects() {
             <div className="projects-mobile-list">
               {items.map((project, index) => (
                 <article key={project.id} className="projects-card glass-card" data-stagger-item style={{ "--stagger-index": index }}>
-                  <div className="projects-card-top">
-                    <div className="projects-card-identity">
-                      <span className="projects-card-index">
-                        {labels.projectPrefix} {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="projects-card-category">{project.category}</span>
+                  <div className="projects-card-header-strip" />
+                  <div className="projects-card-body">
+                    <div className="projects-card-top">
+                      <div className="projects-card-identity">
+                        <span className="projects-card-index">
+                          {labels.projectPrefix} {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span className="projects-card-category">{project.category}</span>
+                      </div>
+                      {project.privateProject ? <span className="projects-card-private">{labels.privateProject}</span> : null}
                     </div>
-                    {project.privateProject ? <span className="projects-card-private">{labels.privateProject}</span> : null}
-                  </div>
 
-                  <h3>{project.name}</h3>
-                  <p className="projects-card-summary">{project.summary}</p>
+                    <h3>{project.name}</h3>
+                    <p className="projects-card-summary">{project.summary}</p>
 
-                  <div className="projects-card-role">
-                    <span>{labels.role}</span>
-                    <strong>{project.role}</strong>
-                  </div>
+                    <div className="projects-card-role">
+                      <span>{labels.role}</span>
+                      <strong>{project.role}</strong>
+                    </div>
 
-                  <div className="projects-card-tech" aria-label={labels.techStackAria}>
-                    {project.tech.map((tech) => (
-                      <span key={tech}>{tech}</span>
-                    ))}
-                  </div>
-
-                  <div className="projects-card-features">
-                    <h4>{labels.keyFeatures}</h4>
-                    <ul>
-                      {project.features.map((feature) => (
-                        <li key={feature}>{feature}</li>
+                    <div className="projects-card-tech" aria-label={labels.techStackAria}>
+                      {project.tech.map((tech) => (
+                        <span key={tech}>{tech}</span>
                       ))}
-                    </ul>
+                    </div>
+
+                    <div className="projects-card-features">
+                      <h4>{labels.keyFeatures}</h4>
+                      <ul>
+                        {project.features.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
           ) : (
             <div className="projects-stage">
-              <aside className="projects-navigator" data-animate>
-                {/* <p className={`projects-navigator-direction is-${scrollingDirection}`}>
-                  {scrollingDirection === "down" ? labels.scrollingDown : labels.scrollingUp}
-                </p> */}
-
-                <div className="projects-navigator-stack">
-                  {items.map((project, index) => {
-                    const stateClass =
-                      index === activeIndex ? "is-active" : index < activeIndex ? "is-prev" : "is-next";
-
-                    return (
-                      <article key={project.id} className={`projects-navigator-item ${stateClass}`}>
-                        <p className="projects-navigator-index">
-                          {labels.projectPrefix} {String(index + 1).padStart(2, "0")}
-                        </p>
-                      </article>
-                    );
-                  })}
-                </div>
+              <aside className="projects-navigator glass-card" data-animate>
+                {items.map((project, index) => {
+                  const stateClass = index === activeIndex ? "is-active" : "";
+                  return (
+                    <div key={project.id} className={`projects-nav-item ${stateClass}`}>
+                      <span className="projects-nav-num">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="projects-nav-name">{project.name}</span>
+                      <span className="projects-nav-bar" />
+                    </div>
+                  );
+                })}
               </aside>
 
               <div className="projects-spotlight">
@@ -156,41 +151,43 @@ export default function Projects() {
 
                     return (
                       <article key={project.id} className={`projects-card glass-card ${stateClass}`}>
-                        <div className="projects-card-top">
-                          <div className="projects-card-identity">
-                            <span className="projects-card-index">
-                              {labels.projectPrefix} {String(index + 1).padStart(2, "0")}
-                            </span>
-                            <span className="projects-card-category">{project.category}</span>
+                        <div className="projects-card-header-strip" />
+                        <div className="projects-card-body">
+                          <div className="projects-card-top">
+                            <div className="projects-card-identity">
+                              <span className="projects-card-index">
+                                {labels.projectPrefix} {String(index + 1).padStart(2, "0")}
+                              </span>
+                              <span className="projects-card-category">{project.category}</span>
+                            </div>
+                            {project.privateProject ? <span className="projects-card-private">{labels.privateProject}</span> : null}
                           </div>
 
-                          {project.privateProject ? <span className="projects-card-private">{labels.privateProject}</span> : null}
-                        </div>
+                          <h3>{project.name}</h3>
+                          <p className="projects-card-summary">{project.summary}</p>
 
-                        <h3>{project.name}</h3>
-                        <p className="projects-card-summary">{project.summary}</p>
+                          <div className="projects-card-role">
+                            <span>{labels.role}</span>
+                            <strong>{project.role}</strong>
+                          </div>
 
-                        <div className="projects-card-role">
-                          <span>{labels.role}</span>
-                          <strong>{project.role}</strong>
-                        </div>
-
-                        <div className="projects-card-tech" aria-label={labels.techStackAria}>
-                          {project.tech.map((tech) => (
-                            <span key={tech}>{tech}</span>
-                          ))}
-                        </div>
-
-                        <div className="projects-card-features">
-                          <h4>{labels.keyFeatures}</h4>
-                          <ul>
-                            {project.features.map((feature) => (
-                              <li key={feature}>{feature}</li>
+                          <div className="projects-card-tech" aria-label={labels.techStackAria}>
+                            {project.tech.map((tech) => (
+                              <span key={tech}>{tech}</span>
                             ))}
-                          </ul>
-                        </div>
+                          </div>
 
-                        <p className="projects-private-note">{labels.confidentialNote}</p>
+                          <div className="projects-card-features">
+                            <h4>{labels.keyFeatures}</h4>
+                            <ul>
+                              {project.features.map((feature) => (
+                                <li key={feature}>{feature}</li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <p className="projects-private-note">{labels.confidentialNote}</p>
+                        </div>
                       </article>
                     );
                   })}

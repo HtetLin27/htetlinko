@@ -6,39 +6,68 @@ const About = () => {
 
   return (
     <section className="about-section">
-      <div className="about-layout container">
-        <header className="about-primary" data-animate>
-          <p className="about-eyebrow">{about.eyebrow}</p>
-          <h2 className="about-title">{about.title}</h2>
-          <p className="about-support">{about.support}</p>
-        </header>
+      <div className="about-container container">
 
-        <aside className="about-secondary" data-animate>
-          <section className="about-story">
-            <h3>{about.storyTitle}</h3>
-            <p>{about.story}</p>
-          </section>
+        {/* ── Top row: headline + at-a-glance ── */}
+        <div className="about-top" data-animate>
+          <div className="about-headline-block">
+            <p className="about-eyebrow">{about.eyebrow}</p>
+            <h2 className="about-title">{about.title}</h2>
+            <p className="about-support">{about.support}</p>
+          </div>
 
-          <dl className="about-info-list">
-            {about.infoRows.map((item, index) => (
-              <div key={item.label} className="about-info-row" data-stagger-item style={{ "--stagger-index": index }}>
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <section className="about-skills">
-            <h4>{about.skillsTitle}</h4>
-            <div className="about-skill-list">
-              {about.skills.map((skill, index) => (
-                <span key={skill} className="about-skill-chip" data-stagger-item style={{ "--stagger-index": index }}>
-                  {skill}
-                </span>
+          <div className="about-glance glass-card">
+            <p className="about-glance-label">At a glance</p>
+            <div className="about-stats">
+              {about.stats.map((stat) => (
+                <div key={stat.label} className="about-stat">
+                  <span className="about-stat-value">{stat.value}</span>
+                  <span className="about-stat-label">{stat.label}</span>
+                </div>
               ))}
             </div>
-          </section>
-        </aside>
+            <div className="about-glance-rows">
+              {about.infoRows.map((row) => (
+                <div key={row.label} className="about-glance-row">
+                  <span>{row.label}</span>
+                  <strong>{row.value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Story card ── */}
+        <div className="about-story-card glass-card" data-animate>
+          <div className="about-story-inner">
+            <div className="about-story-header">
+              <span className="about-story-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
+                  <path d="M12 8v4l3 3" />
+                </svg>
+              </span>
+              <h3>{about.storyTitle}</h3>
+            </div>
+            <p>{about.story}</p>
+          </div>
+          <div className="about-story-accent" aria-hidden="true" />
+        </div>
+
+        {/* ── Skills bento ── */}
+        <div className="about-skills-grid" data-animate>
+          {about.skillGroups.map((group) => (
+            <div key={group.label} className="about-skill-group glass-card">
+              <span className="about-skill-group-label">{group.label}</span>
+              <div className="about-skill-chips">
+                {group.skills.map((skill) => (
+                  <span key={skill} className="about-skill-chip">{skill}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

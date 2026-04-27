@@ -1,27 +1,32 @@
 #about.page-section {
-  min-height: 100svh;
-  height: 100svh;
+  min-height: auto;
+  height: auto;
   padding: 0;
   align-items: stretch;
 }
 
 .about-section {
   width: 100%;
-  height: 100%;
+  padding-block: clamp(3.5rem, 7vh, 5.5rem);
+}
+
+.about-container {
   display: flex;
-  align-items: center;
-  padding-block: clamp(1rem, 2.2vh, 1.8rem);
+  flex-direction: column;
+  gap: clamp(1rem, 2.2vh, 1.5rem);
 }
 
-.about-layout {
+/* ── Top row ── */
+.about-top {
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  align-items: center;
-  gap: clamp(1.2rem, 3vw, 3.6rem);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
+  align-items: start;
 }
 
-.about-primary {
-  max-width: 760px;
+.about-headline-block {
+  display: grid;
+  gap: 0.7rem;
 }
 
 .about-eyebrow {
@@ -43,131 +48,243 @@
 }
 
 .about-title {
-  margin-top: 0.84rem;
-  max-width: 10.5ch;
+  max-width: 14ch;
   text-wrap: balance;
   font-family: "Lora", "Times New Roman", serif;
-  font-size: clamp(2.05rem, 4.1vw, 4rem);
-  line-height: 0.98;
+  font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+  line-height: 1.05;
   letter-spacing: -0.018em;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-support {
-  margin-top: 1rem;
-  max-width: 56ch;
-  font-size: clamp(0.98rem, 1.1vw, 1.16rem);
-  line-height: 1.6;
+  max-width: 52ch;
+  font-size: clamp(0.96rem, 1.05vw, 1.1rem);
+  line-height: 1.65;
   color: var(--text-muted);
 }
 
-.about-secondary {
-  width: 100%;
-  border-left: 1px solid color-mix(in srgb, var(--surface-border) 78%, transparent);
-  padding-left: clamp(0.95rem, 2.5vw, 2rem);
-  display: grid;
-  gap: 1.05rem;
+/* ── At-a-glance card ── */
+.about-glance {
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
-.about-story h3,
-.about-skills h4 {
-  font-family: "Lora", "Times New Roman", serif;
-  font-size: clamp(1.14rem, 1.6vw, 1.34rem);
-  line-height: 1.22;
-  color: var(--text-primary);
-}
-
-.about-story p {
-  margin-top: 0.62rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  max-width: 48ch;
-}
-
-.about-info-list {
-  border-top: 1px solid color-mix(in srgb, var(--surface-border) 82%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--surface-border) 82%, transparent);
-}
-
-.about-info-row {
-  display: grid;
-  gap: 0.2rem;
-  padding: 0.8rem 0;
-  border-top: 1px solid color-mix(in srgb, var(--surface-border) 72%, transparent);
-}
-
-.about-info-row:first-child {
-  border-top: 0;
-}
-
-.about-info-row dt {
+.about-glance-label {
   font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-soft);
   font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
 }
 
-.about-info-row dd {
-  font-size: clamp(1.05rem, 1.25vw, 1.42rem);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.about-stat {
+  background: var(--tone-primary-bg);
+  border: 1px solid var(--tone-primary-border);
+  border-radius: 14px;
+  padding: 0.75rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.22rem;
+  text-align: center;
+}
+
+.about-stat-value {
+  font-family: "Lora", "Times New Roman", serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-stat-label {
+  font-size: 0.65rem;
   font-weight: 600;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-align: center;
 }
 
-.about-skill-list {
-  margin-top: 0.6rem;
+.about-glance-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--surface-border);
+  padding-top: 0.8rem;
+}
+
+.about-glance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.52rem 0;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.about-glance-row:last-child {
+  border-bottom: 0;
+}
+
+.about-glance-row span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-soft);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.about-glance-row strong {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+  line-height: 1.3;
+}
+
+/* ── Story card ── */
+.about-story-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.2rem, 2.4vw, 1.8rem);
+}
+
+.about-story-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.about-story-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.about-story-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--tone-primary-bg);
+  border: 1px solid var(--tone-primary-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-secondary);
+  flex-shrink: 0;
+}
+
+.about-story-header h3 {
+  font-family: "Lora", "Times New Roman", serif;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: var(--text-primary);
+}
+
+.about-story-inner p {
+  font-size: clamp(0.92rem, 1vw, 1.02rem);
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 88ch;
+}
+
+/* decorative glow in corner */
+.about-story-accent {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  right: -60px;
+  top: -80px;
+  background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Skills bento ── */
+.about-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.7rem, 1.4vw, 1rem);
+}
+
+.about-skill-group {
+  padding: clamp(0.9rem, 1.8vw, 1.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.about-skill-group-label {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+.about-skill-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .about-skill-chip {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--surface-border-strong) 74%, var(--surface-border));
+  border: 1px solid var(--tone-primary-border);
+  background: var(--tone-primary-bg);
   color: var(--text-muted);
-  background: color-mix(in srgb, var(--surface-1) 84%, transparent);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  line-height: 1;
-  padding: 0.46rem 0.8rem;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  padding: 0.3rem 0.65rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
 .about-skill-chip:hover {
   border-color: var(--accent);
-  color: var(--text-primary);
-  transform: translateY(-1px);
+  color: var(--accent-secondary);
+  background: var(--tone-primary-bg);
 }
 
-@media (max-width: 1080px) {
-  #about.page-section {
-    min-height: auto;
-    height: auto;
+@media (max-width: 1100px) {
+  .about-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .about-section {
-    height: auto;
-    padding-block: 1.6rem;
-  }
-
-  .about-layout {
+@media (max-width: 860px) {
+  .about-top {
     grid-template-columns: 1fr;
-    gap: 1.45rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .about-skills-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .about-title {
-    max-width: 14ch;
-  }
-
-  .about-secondary {
-    border-left: 0;
-    border-top: 1px solid color-mix(in srgb, var(--surface-border) 80%, transparent);
-    padding-left: 0;
-    padding-top: 1rem;
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
