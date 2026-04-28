@@ -3,7 +3,11 @@ export const SITE_NAME = "Htet Lin Ko Portfolio";
 export const SEO_TITLE = "Htet Lin Ko – Senior Frontend Developer | Portfolio";
 export const SEO_DESCRIPTION =
   "Htet Lin Ko is a Senior Frontend Developer specializing in React, Vue, Next.js, and scalable frontend systems.";
-export const SEO_IMAGE = `${SITE_URL}/hero-portrait.webp`;
+export const SEO_IMAGE = `${SITE_URL}/og-image.jpg`;
+export const SEO_IMAGE_WIDTH = "1200";
+export const SEO_IMAGE_HEIGHT = "630";
+export const SEO_IMAGE_TYPE = "image/jpeg";
+export const PERSON_IMAGE = `${SITE_URL}/hero-portrait.webp`;
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/HtetLin27",
@@ -16,7 +20,7 @@ export const PERSON_SCHEMA = {
   "@type": "Person",
   name: "Htet Lin Ko",
   url: SITE_URL,
-  image: SEO_IMAGE,
+  image: PERSON_IMAGE,
   jobTitle: "Senior Frontend Developer",
   email: "htetlinko.dev@gmail.com",
   sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github, SOCIAL_LINKS.facebook],
@@ -76,17 +80,28 @@ export const buildSeoHead = (seo = homeSeo) => {
 
   return [
     `<title>${title}</title>`,
+    `<meta name="title" content="${title}" />`,
     `<meta name="description" content="${description}" />`,
     `<meta name="robots" content="index, follow" />`,
     `<link rel="canonical" href="${canonicalUrl}" />`,
+    `<link rel="image_src" href="${image}" />`,
+    `<meta itemprop="name" content="${title}" />`,
+    `<meta itemprop="description" content="${description}" />`,
+    `<meta itemprop="image" content="${image}" />`,
     `<meta property="og:title" content="${title}" />`,
     `<meta property="og:description" content="${description}" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:image" content="${image}" />`,
+    `<meta property="og:image:secure_url" content="${image}" />`,
+    `<meta property="og:image:type" content="${SEO_IMAGE_TYPE}" />`,
+    `<meta property="og:image:width" content="${SEO_IMAGE_WIDTH}" />`,
+    `<meta property="og:image:height" content="${SEO_IMAGE_HEIGHT}" />`,
     `<meta property="og:image:alt" content="Portrait of Htet Lin Ko" />`,
+    `<meta property="og:locale" content="en_US" />`,
     `<meta property="og:site_name" content="${escapeHtml(SITE_NAME)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:url" content="${url}" />`,
     `<meta name="twitter:title" content="${title}" />`,
     `<meta name="twitter:description" content="${description}" />`,
     `<meta name="twitter:image" content="${image}" />`,
