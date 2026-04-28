@@ -85,11 +85,24 @@
   gap: 0.1em;
 }
 
+.hero-name-line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.05em;
+}
+
 .hero-name {
   font-family: "Lora", "Times New Roman", serif;
   font-size: clamp(1.35rem, 2.4vw, 2rem);
   line-height: 1.1;
   letter-spacing: 0.01em;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.hero-name-divider {
+  font-family: "Lora", "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
   color: var(--text-primary);
   font-weight: 600;
 }
@@ -174,6 +187,20 @@
   background: var(--surface-1);
   color: var(--text-soft);
   font-size: 0.71rem;
+}
+
+.hero-identity-link {
+  display: inline-flex;
+  margin-top: 0.84rem;
+  color: var(--accent-secondary);
+  font-size: 0.82rem;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.24em;
+}
+
+.hero-identity-link:hover {
+  color: var(--accent-strong);
 }
 
 .hero-visual {
@@ -263,7 +290,8 @@
   }
 
   .hero-actions,
-  .hero-pills {
+  .hero-pills,
+  .hero-identity-link {
     justify-content: center;
   }
 
@@ -302,6 +330,10 @@
   .hero-pills {
     width: 100%;
     max-width: 340px;
+  }
+
+  .hero-name-line {
+    justify-content: center;
   }
 
   .hero-pill {

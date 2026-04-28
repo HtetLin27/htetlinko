@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef } from "react";
+import { Link } from "react-router-dom";
 import { portfolioData } from "../../data/portfolio";
 import "./hero.css";
 
@@ -59,7 +60,10 @@ const Hero = () => {
         <div className="hero-copy" data-animate>
           <p className="hero-badge">{hero.badge}</p>
           <h1 className="hero-name-heading">
-            <span className="hero-name">{hero.name},</span>
+            <span className="hero-name-line">
+              <span className="hero-name">{hero.name}</span>
+              <span className="hero-name-divider"> – </span>
+            </span>
             <span className="hero-title">{hero.headline}</span>
           </h1>
           <p className="hero-subtext">{hero.summary}</p>
@@ -94,7 +98,15 @@ const Hero = () => {
               </text>
             </svg>
             <figure className="hero-portrait-frame">
-              <img src={hero.portrait.src} alt={hero.portrait.alt} className="hero-portrait" loading="eager" />
+              <img
+                src={hero.portrait.src}
+                alt={hero.portrait.alt}
+                className="hero-portrait"
+                width="1024"
+                height="1024"
+                loading="eager"
+                fetchPriority="high"
+              />
             </figure>
           </div>
 

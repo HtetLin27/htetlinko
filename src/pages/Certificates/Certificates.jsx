@@ -55,7 +55,7 @@ export default function Certificates() {
             onMouseEnter={() => setHovered(cert.id)}
             onMouseLeave={() => setHovered(null)}
           >
-            <img src={cert.imageUrl} alt={cert.title} loading="lazy" />
+            <img src={cert.imageUrl} alt={`${cert.title} certificate earned by Htet Lin Ko`} loading="lazy" decoding="async" />
             <div className="cert-item-overlay">
               <span className="cert-item-issuer">{cert.issuer}</span>
               <p className="cert-item-title">{cert.title}</p>

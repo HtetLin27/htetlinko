@@ -1,14 +1,23 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import { inject } from "@vercel/analytics";
 import "./index.css";
-import router from "./route/index.jsx";
+import App from "./App";
 
 inject();
 
-createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+const app = (
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
 );
+
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}

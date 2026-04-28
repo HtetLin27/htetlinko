@@ -8,6 +8,7 @@ import Certificates from "../../pages/Certificates/Certificates";
 import Contact from "../../pages/Contact/Contact";
 import ExperienceTimeline from "../ExperienceTimeline/ExperienceTimeline";
 import { portfolioData } from "../../data/portfolio";
+import { useTheme } from "../../hooks/useTheme";
 
 const sectionComponentMap = {
   hero: Hero,
@@ -22,24 +23,9 @@ const sectionItems = portfolioData.sections
   .map((id) => ({ id, component: sectionComponentMap[id] }))
   .filter((item) => item.component);
 
-const THEME_STORAGE_KEY = "portfolio-theme";
-
-const getInitialTheme = () => {
-  if (typeof window === "undefined") {
-    return "light";
-  }
-
-  const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-  if (storedTheme === "light" || storedTheme === "dark") {
-    return storedTheme;
-  }
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-};
-
 const Layout = () => {
   const [activeSection, setActiveSection] = useState("hero");
-  const [theme, setTheme] = useState(getInitialTheme);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,18 +86,6 @@ const Layout = () => {
     };
   }, []);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  const handleThemeToggle = () => {
-    setTheme((previousTheme) => {
-      const nextTheme = previousTheme === "dark" ? "light" : "dark";
-      window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-      return nextTheme;
-    });
-  };
-
   return (
     <div className="site-layout">
       <main>
@@ -127,7 +101,7 @@ const Layout = () => {
       </main>
 
       <div className="menu-lists">
-        <Menu activeSection={activeSection} theme={theme} onThemeToggle={handleThemeToggle} />
+        <Menu activeSection={activeSection} theme={theme} onThemeToggle={toggleTheme} />
       </div>
     </div>
   );

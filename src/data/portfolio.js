@@ -32,9 +32,9 @@ export const portfolioData = {
   hero: {
     badge: "Senior Frontend Developer · Open to Full Stack Roles",
     name: "Htet Lin Ko",
-    headline: "Frontend-Focused Full Stack Developer",
+    headline: "Senior Frontend Developer",
     summary:
-      "I build scalable React, Next.js, Vue, and Nuxt interfaces for HR, recruitment, and internal business systems — with strong API integration across GraphQL and REST.",
+      "Htet Lin Ko builds scalable React, Next.js, Vue, and Nuxt interfaces for HR, recruitment, and internal business systems — with strong API integration across GraphQL and REST.",
     primaryCta: {
       label: "View Case Studies",
       href: "#projects",
