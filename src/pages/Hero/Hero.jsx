@@ -59,11 +59,8 @@ const Hero = () => {
       <div className="hero-layout container">
         <div className="hero-copy" data-animate>
           <p className="hero-badge">{hero.badge}</p>
-          <h1 className="hero-name-heading">
-            <span className="hero-name-line">
-              <span className="hero-name">{hero.name}</span>
-              <span className="hero-name-divider"> – </span>
-            </span>
+          <h1 className="hero-name-heading" aria-label={`${hero.name} – ${hero.headline}`}>
+            <span className="hero-name">{hero.name}</span>
             <span className="hero-title">{hero.headline}</span>
           </h1>
           <p className="hero-subtext">{hero.summary}</p>

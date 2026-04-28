@@ -69,6 +69,7 @@ const Seo = ({ seo }) => {
     upsertMeta("property", "og:type", "website");
     upsertMeta("property", "og:url", seo.url);
     upsertMeta("property", "og:image", seo.image);
+    upsertMeta("property", "og:image:url", seo.image);
     upsertMeta("property", "og:image:secure_url", seo.image);
     upsertMeta("property", "og:image:type", SEO_IMAGE_TYPE);
     upsertMeta("property", "og:image:width", SEO_IMAGE_WIDTH);

@@ -4,7 +4,8 @@ export const SITE_NAME = "Htet Lin Ko Portfolio";
 export const SEO_TITLE = "Htet Lin Ko – Senior Frontend Developer | Portfolio";
 export const SEO_DESCRIPTION =
   "Htet Lin Ko is a Senior Frontend Developer specializing in React, Vue, Next.js, and scalable frontend systems.";
-export const SEO_IMAGE = `${SITE_ORIGIN}/og-image.jpg`;
+export const PREVIEW_VERSION = "20260428-2";
+export const SEO_IMAGE = `${SITE_ORIGIN}/og-image.jpg?v=${PREVIEW_VERSION}`;
 export const SEO_IMAGE_WIDTH = "1200";
 export const SEO_IMAGE_HEIGHT = "630";
 export const SEO_IMAGE_TYPE = "image/jpeg";
@@ -56,9 +57,19 @@ export const identitySeo = {
   image: SEO_IMAGE,
 };
 
+export const shareSeo = {
+  title: SEO_TITLE,
+  description: SEO_DESCRIPTION,
+  canonicalUrl: `${SITE_ORIGIN}/share/`,
+  url: `${SITE_ORIGIN}/share/`,
+  image: SEO_IMAGE,
+};
+
 export const seoByPath = {
   "/": homeSeo,
   "/htet-lin-ko": identitySeo,
+  "/share": shareSeo,
+  "/share/": shareSeo,
 };
 
 export const getSeoForPath = (pathname = "/") => seoByPath[pathname] ?? homeSeo;
@@ -94,6 +105,7 @@ export const buildSeoHead = (seo = homeSeo) => {
     `<meta property="og:type" content="website" />`,
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:image" content="${image}" />`,
+    `<meta property="og:image:url" content="${image}" />`,
     `<meta property="og:image:secure_url" content="${image}" />`,
     `<meta property="og:image:type" content="${SEO_IMAGE_TYPE}" />`,
     `<meta property="og:image:width" content="${SEO_IMAGE_WIDTH}" />`,
