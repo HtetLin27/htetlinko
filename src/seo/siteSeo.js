@@ -1,13 +1,14 @@
-export const SITE_URL = "https://www.htetlinko.com";
+export const SITE_ORIGIN = "https://www.htetlinko.com";
+export const SITE_URL = `${SITE_ORIGIN}/`;
 export const SITE_NAME = "Htet Lin Ko Portfolio";
 export const SEO_TITLE = "Htet Lin Ko – Senior Frontend Developer | Portfolio";
 export const SEO_DESCRIPTION =
   "Htet Lin Ko is a Senior Frontend Developer specializing in React, Vue, Next.js, and scalable frontend systems.";
-export const SEO_IMAGE = `${SITE_URL}/og-image.jpg`;
+export const SEO_IMAGE = `${SITE_ORIGIN}/og-image.jpg`;
 export const SEO_IMAGE_WIDTH = "1200";
 export const SEO_IMAGE_HEIGHT = "630";
 export const SEO_IMAGE_TYPE = "image/jpeg";
-export const PERSON_IMAGE = `${SITE_URL}/hero-portrait.webp`;
+export const PERSON_IMAGE = `${SITE_ORIGIN}/hero-portrait.webp`;
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/HtetLin27",
@@ -50,8 +51,8 @@ export const identitySeo = {
   title: "Htet Lin Ko – Senior Frontend Developer Profile",
   description:
     "Official profile of Htet Lin Ko, Senior Frontend Developer with a career journey from network engineering to React, Vue, Next.js, and scalable frontend systems.",
-  canonicalUrl: `${SITE_URL}/htet-lin-ko`,
-  url: `${SITE_URL}/htet-lin-ko`,
+  canonicalUrl: `${SITE_ORIGIN}/htet-lin-ko`,
+  url: `${SITE_ORIGIN}/htet-lin-ko`,
   image: SEO_IMAGE,
 };
 
@@ -101,6 +102,7 @@ export const buildSeoHead = (seo = homeSeo) => {
     `<meta property="og:locale" content="en_US" />`,
     `<meta property="og:site_name" content="${escapeHtml(SITE_NAME)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:domain" content="htetlinko.com" />`,
     `<meta name="twitter:url" content="${url}" />`,
     `<meta name="twitter:title" content="${title}" />`,
     `<meta name="twitter:description" content="${description}" />`,

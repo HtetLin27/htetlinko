@@ -78,6 +78,7 @@ const Seo = ({ seo }) => {
     upsertMeta("property", "og:site_name", SITE_NAME);
 
     upsertMeta("name", "twitter:card", "summary_large_image");
+    upsertMeta("name", "twitter:domain", "htetlinko.com");
     upsertMeta("name", "twitter:url", seo.url);
     upsertMeta("name", "twitter:title", seo.title);
     upsertMeta("name", "twitter:description", seo.description);
