@@ -36,7 +36,7 @@
     right: auto;
     left: 50%;
     top: auto;
-    bottom: max(0.6rem, env(safe-area-inset-bottom));
+    bottom: max(0.28rem, env(safe-area-inset-bottom));
     transform: translateX(-50%);
   }
 }

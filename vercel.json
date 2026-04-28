@@ -1,4 +1,17 @@
 {
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "htetlinko.com"
+        }
+      ],
+      "destination": "https://www.htetlinko.com/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/",

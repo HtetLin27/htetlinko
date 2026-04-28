@@ -309,11 +309,19 @@
   .hero-section {
     min-height: auto;
     height: auto;
-    padding: 4.9rem 0 3.9rem;
+    padding: calc(4.2rem + env(safe-area-inset-top)) 0 calc(7.4rem + env(safe-area-inset-bottom));
   }
 
   .hero-title {
     font-size: clamp(2.1rem, 10vw, 3.4rem);
+  }
+
+  .hero-copy {
+    width: 100%;
+  }
+
+  .hero-name-heading {
+    align-items: center;
   }
 
   .hero-actions {
@@ -334,6 +342,11 @@
 
   .hero-name-line {
     justify-content: center;
+    gap: 0.16em;
+  }
+
+  .hero-name-divider {
+    margin-left: 0.08em;
   }
 
   .hero-pill {
@@ -344,11 +357,12 @@
   .hero-visual {
     width: 100%;
     max-width: 330px;
+    margin-top: 0.2rem;
   }
 
   .hero-portrait-shell {
     width: 100%;
-    max-width: 306px;
+    max-width: 290px;
   }
 
   .hero-rotating-ring text {
